@@ -1,0 +1,126 @@
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+        .sidenav {
+            height:100%;
+            width:160px;
+            position: fixed;
+            background-color: black;
+            overflow-x:hidden;
+            padding-top: 20px;
+        }
+        .sidenav a {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size:18px;
+            color: #818181;
+            display:block;
+        }
+        .sidenav a:hover{
+            color:#f1f1f1;
+        }
+
+        .main{
+            margin-left:160px;
+            padding: 0px 10px;
+        }
+        .course-container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .course {
+            width: auto;
+            height: auto;
+            border: 1px solid black;
+            margin: 10px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .course:hover {
+            transform: scale(1.1);
+        }
+
+        .course-expanded {
+            height: auto;
+        }
+
+        .course-details
+        {
+            display: none;
+        }
+
+        .course-expanded .course-details {
+            display: block;
+        }
+    </style>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <title>{% block title %}Strona{% endblock %}</title>
+</head>
+
+<body>
+
+<div class="sidenav">
+    <a href="/home/">Strona główna</a>
+    <a href="/student/">Strefa studenta</a>
+    <a href="/register/">Rejestracja</a>
+    <!--<a href="/facilitator/">Strefa pracownika</a>-->
+    {% if user.is_authenticated %}
+    <a href="/logout/">Wyloguj</a>
+    {% endif %}
+</div>
+
+<div class ="main", id="content", name="content">
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <h1 class="mt-2">
+                {% block title2 %}
+                {% endblock %}
+            </h1>
+            <hr class="mt-0 mb-4">
+            {% block content %}
+            {% endblock %}
+
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+</body>
+<script>
+    function toggleCourse(course) {
+        course.classList.toggle('course-expanded');
+    }
+
+    function registerForCourse(courseId) {
+        window.location.href = ''
+    }
+
+    window.addEventListener('load', function() {
+        var courseDivs = document.getElementsByClassName('course');
+        var maxWidth = 0;
+
+        for (var i = 0; i < courseDivs.length; i++) {
+            var width = courseDivs[i].offsetWidth;
+            if (width > maxWidth) {
+                maxWidth = width;
+            }
+        }
+        for (var i = 0; i < courseDivs.length; i++) {
+            courseDivs[i].style.width = maxWidth + 'px';
+        }
+    })
+
+</script>
+
+
+</html>

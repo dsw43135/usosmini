@@ -1,0 +1,36 @@
+{% extends 'school/base.html' %}
+
+{% block title %}
+Strefa studenta
+{% endblock %}
+
+{% block title2 %}
+Twoje kursy
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        {% if user.student %}
+            <h1>Cześć {{ user.student.name}}</h1>
+            <a href="/courses/"  class="btn btn-primary btn-lg">Dostępne kursy</a>
+            <a href="/yourcourses/"  class="btn btn-primary btn-lg">Twoje kursy</a>
+
+            {% for c in courses %}
+                <div class="course-container">
+                    <div class="course" onclick="toggleCourse(this)">
+                        <p>Kurs: {{c.course.name}}</p>
+                        <div class="course-details">
+                            <p>Ocena: {{c.grade}}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            Nie jestes studentem, wypełnij formę <p><a href="/registerstudent/">rejestracji studenta</a></p>
+        {% endif %}
+
+    {% else %}
+        <h1>Zaloguj się</h1>
+        <p><a href="/login/">Login</a></p>
+    {% endif %}
+{% endblock %}

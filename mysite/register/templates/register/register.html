@@ -1,0 +1,17 @@
+{% extends 'school/base.html' %}
+
+{% block title %}
+Rejestracja
+{% endblock %}
+
+{% block title2 %}
+Rejestracja
+{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <form method="POST" class="form-group">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button type="submit" class="btn btn-success">Załóż konto</button>
+    </form>
+{% endblock %}

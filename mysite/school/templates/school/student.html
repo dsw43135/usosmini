@@ -1,0 +1,24 @@
+{% extends 'school/base.html' %}
+
+{% block title %}
+Strefa studenta
+{% endblock %}
+
+{% block title2 %}
+Strefa studenta
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        {% if user.student %}
+            <h1>Cześć {{ user.student.name}}</h1>
+            <a href="/courses/"  class="btn btn-primary btn-lg">Dostępne kursy</a>
+            <a href="/yourcourses/"  class="btn btn-primary btn-lg">Twoje kursy</a>
+        {% else %}
+            Nie jestes studentem, wypełnij formę <p><a href="/registerstudent/">rejestracji studenta</a></p>
+        {% endif %}
+
+    {% else %}
+        <p><a href="/login/">Login</a></p>
+    {% endif %}
+{% endblock %}
