@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'school.apps.SchoolConfig',
     'register.apps.RegisterConfig',
     'rest_framework',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
